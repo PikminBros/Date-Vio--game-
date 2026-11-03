@@ -1,12 +1,15 @@
 ﻿# Declare character (Vio)
 define e = Character("Vio", color="#cca625")
 define s = Character("Stikman", color="#ffffff") # For Stikman dialogue
-define s = Character("Shiver", color="#a7c6e7") # For Shiver dialogue
+define sh = Character("Shiver", color="#a7c6e7") # For Shiver dialogue
 define n = Character(None, color="#ffffff") # For unassigned narrator text
 
 # Solid black background definition
 image bg black = "#000000"
 image bg white = "#ffffff"
+
+# Shiver image definition
+image shiver uwu = "images/shiver_uwu.png"
 
 # Position and scale for 1080p canvas
 transform vio_scale:
@@ -378,7 +381,7 @@ label vio_caught:
                 "Yeah, we should.":
                     pass
 
-                "I'm tired" (disable=True):
+                "I'm tired":
                     pass
 
     show vio happy at vio_scale
@@ -413,7 +416,7 @@ label vio_caught:
     s "HEHEHEHEHHEHEHE"
 
     show vio staretwyouwhilestabbed at vio_right
-    e "AAH!!!!!!!"
+    e "AAH!!!!!!"
 
     show stikman joy at stikman_left
     s "HEHEHEHEHEHEHEHEHAHAHAHAHAHAHAHA"
@@ -514,26 +517,10 @@ label vio_caught:
     show vio lookawayfromyoubandaged at vio_scale
     e ""
 
-n "Vio hugs you really tightly, then kisses you, very lightly on the cheek."
-n "Vio falls asleep."
+    n "Vio hugs you really tightly, then kisses you, very lightly on the cheek."
+    n "Vio falls asleep."
 
-jump true_ending
-n ""
-n "Hey, [player_name] could you help me out?"
-n "...Yeah, me the text."
-
-    menu:
-        "Yes":
-            pass
-
-        "No":
-            return
-
-# Shiver test
-    scene bg white:
-    show shiver uwu
-    e "This is a test."
-return
+    jump true_ending
 
 
 # Bad ending handler for when you leave her
@@ -553,10 +540,26 @@ label vio_pissed_ending:
     n ""
     return
 
+
 # Bad ending handler for the true ending
 label true_ending:
     scene bg true:
         xysize (1920, 1080)
     with dissolve
     n ""
+    n "Hey, [player_name] could you help me out?"
+    n "...Yeah, me the text."
+
+    menu:
+        "Yes":
+            pass
+
+        "No":
+            return
+
+    # Shiver test
+    scene bg white:
+        xysize (1920, 1080)
+    show shiver uwu at vio_scale
+    sh "This is a test."
     return
